@@ -12,6 +12,8 @@ public class StepDefATM {
     ATM atm;
     Bank bank;
     boolean validLogin;
+    String errorMessage;
+
 
     @Before
     public void init() {
@@ -68,6 +70,12 @@ public class StepDefATM {
     public void customer_id_account_balance_is(int id, double balance) {
         assertEquals(balance,
                      bank.getCustomer(id).getAccount().getBalance());
+    }
+    @When("I deposit {float} into ATM")
+    public void i_deposit_into_atm(double amount) {
+        if (amount > 0) {
+            atm.deposit(amount);
+        }
     }
 
 }
